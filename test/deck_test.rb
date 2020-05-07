@@ -90,6 +90,8 @@ class DeckTest < Minitest::Test # Whatever this means
     card4 = Card.new(:Club, "4", 4)
     deck.add_card(card4)
 
+    assert_equal 4, deck.cards.count
+
 
   end
 

@@ -16,7 +16,7 @@ class Deck
   end
 
   def high_ranking_cards
-    # require 'pry'; binding.pry
+    @high_cards = []
     @cards.each do |card|
       if card.rank >= 11
         @high_cards << card
@@ -31,7 +31,16 @@ class Deck
   end
 
   def remove_card
-    @cards.delete_at(0)
+    if @cards[0].rank > 10
+      @cards.delete_at(0)
+      @high_cards.delete_at(0)
+    else
+      @cards.delete_at(0)
+    end
+  end
+
+  def add_card(card)
+    @cards << card
   end
 
 
