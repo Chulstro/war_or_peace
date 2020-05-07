@@ -3,6 +3,7 @@ require './lib/card'
 class Deck
   attr_reader :cards,
               :high_cards
+              # add hotfix
 
   def initialize(cards)
     @cards = cards
