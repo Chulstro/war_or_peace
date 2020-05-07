@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require './lib/deck'
 require './lib/card'
 
-class DeckTest < Minitest::Test
+class DeckTest < Minitest::Test # Whatever this means
 
   def test_card_array_exists
     card1 = Card.new(:diamond, "Queen", 12)
@@ -90,7 +90,7 @@ class DeckTest < Minitest::Test
     card4 = Card.new(:Club, "4", 4)
     deck.add_card(card4)
 
-    
+
   end
 
 end

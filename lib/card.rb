@@ -1,3 +1,4 @@
+# This is a card class
 class Card
   attr_reader :suit,
               :value,
