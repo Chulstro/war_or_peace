@@ -1,7 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/card'
-# Continue commenting
 
 class CardTest < Minitest::Test
   def setup
