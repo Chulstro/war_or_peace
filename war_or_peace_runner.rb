@@ -2,6 +2,9 @@ require './lib/card'
 require './lib/deck'
 require './lib/player'
 require './lib/turn'
+require './lib/start'
+require 'pry'
+
 cards = []
 cards << card1 = Card.new(:heart, 'Ace', 14)
 cards << card2 = Card.new(:heart, 'King', 13)
@@ -55,9 +58,11 @@ cards << card49 = Card.new(:club, '5', 5)
 cards << card50 = Card.new(:club, '4', 4)
 cards << card51 = Card.new(:club, '3', 3)
 cards << card52 = Card.new(:club, '2', 2)
-
-deck1 = cards.shuffle.slice!(1..26)
-deck2 = cards.shuffle.slice!(1..26)
+cards.shuffle!
+deck1 = cards.slice!(1..26)
+deck2 = cards
+deck1.shuffle!
+deck2.shuffle!
 
 player1_deck = Deck.new(deck1)
 player2_deck = Deck.new(deck2)
@@ -65,8 +70,39 @@ player2_deck = Deck.new(deck2)
 player1 = Player.new("John", player1_deck)
 player2 = Player.new("Jen", player2_deck)
 
+
+turn = Turn.new(player1, player2)
+x = 1
 puts "Welcome to War! (or Peace) This game will be played with 52 cards."
 puts "The players today are #{player1.name} and #{player2.name}."
 puts "Type GO to start the game!"
 start = gets.chomp
-require 'pry'; binding.pry
+play = Start.new(1000000)
+
+if start == "GO"
+  while turn.type != :end && x < 1000000
+    winner = turn.winner
+    turn.pile_cards
+    x += 1
+    if turn.type == :basic
+      turn.award_spoils(winner)
+      puts "Turn #{x}: #{turn.winner.name} won 2 cards"
+    elsif turn.type == :war
+      # binding.pry
+      turn.award_spoils(winner)
+      puts "Turn #{x}: WAR - #{turn.winner.name} won 6 cards"
+    elsif turn.type == :mutually_assured_destruction
+      puts "Turn #{x}: *mutally assured destruction* 6 cards removed from play"
+    elsif turn.type == :end
+      puts "Turn #{x}: #{turn.winner.name} has won the game!"
+    end
+    puts player1.deck.cards.count
+    puts player2.deck.cards.count
+  end
+
+  if x = 1000000
+    puts "~~~~~~~~~~DRAW~~~~~~~~~~~~"
+  else
+    puts "~~~~~~~~~#{turn.winner.name} has won the game!~~~~~~~~~~~"
+  end
+end

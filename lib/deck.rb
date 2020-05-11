@@ -12,6 +12,7 @@ class Deck
   def rank_of_card_at(num)
     ranking_card = @cards[num]
     ranking_card.rank
+    # require 'pry'; binding.pry
   end
 
   def high_ranking_cards
